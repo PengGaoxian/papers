@@ -1,4 +1,4 @@
-## 修改评价指标权重
+## 代码运行说明
 1. 在paint_Data.m文件中找到filename_set参数，其中“1111”的每一位分别代表w_Energy、w_Quality、w_Cost、w_Time的权重分配比例，“1111”代表权重均匀分配成4份，每份权重为0.25，“1011”代表权重均匀分配为3份，每份权重为0.333...
     ```matlab
     filename_set = [
