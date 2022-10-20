@@ -53,8 +53,8 @@ total_min_Tl = total_min_dist * T_unit_dist;
 total_min_Cl = total_min_dist * C_unit_dist;
 
 %% Composite service parameters (regardless of optimal values for logistics and waiting times)
-Quality_max = sum(max(Q,[],1))/subtask_num;
-Time_min = sum(min(Ts,[],1)) + total_min_Tl;
-Cost_min = sum(min(Cs,[],1)) + total_min_Cl;
+Quality_max = sum(max(Q,[],1))/subtask_num; 
+Time_min = sum(min(Ts,[],1)) + total_min_Tl; 
+Cost_min = sum(min(Cs,[],1)) + total_min_Cl; 
 Energy_max = sum(max(Eh,[],1))*2;
 

@@ -40,9 +40,9 @@ while(gen <= gen_max)
     [Start_logistics,End_logistics] = Start_End_logistics(End_candidate_service,Tl); % 计算种群中每个个体对应的子任务的运输开始时间和运输结束时间
     
     %% 计算Population_combined种群的上层适应度
-    E = energy_saving(Eh,Population_combined,Th,Tc,Idle,Start_candidate_service,End_candidate_service); % 各候选服务节约的能量
-    Energy = sum(E,2); % 种群中个体的总节约能耗
-    Energy_dimensionless = dimensionless_Energy(Energy,Energy_max); % 节约的能量无量纲化
+    E = preheating_energy(Eh,Population_combined,Th,Tc,Idle,Start_candidate_service,End_candidate_service); % 各候选服务总的实际预热能耗
+    Energy = sum(E,2); % 种群中个体的总的预热能耗
+    Energy_dimensionless = dimensionless_Energy(Energy,Energy_max); % 对总的预热能耗进行无量纲化
     Fitness_top = fitness_Energy(Energy_dimensionless); % 上层适应度值
     
     %% 计算Population_combined种群的底层适应度

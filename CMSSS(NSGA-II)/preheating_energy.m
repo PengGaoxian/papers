@@ -1,11 +1,15 @@
-%% 子任务对应的候选服务节约的能耗
+%% 子任务对应的候选服务的实际预热能耗
 % 输入
 %   Eh：候选服务的预热能耗
 %   Population：种群
-%   Cohesion：种群的衔接度
+%   Th：预热时间
+%   Tc：冷却时间
+%   Idle：空闲时间
+%   Start_candidate_service：候选服务的服务开始时间
+%   End_candidate_service：候选服务的服务结束时间
 % 输出
-%   E：种群中个体节约的能耗
-function [E] = energy_saving(Eh,Population,Th,Tc,Idle,Start_candidate_service,End_candidate_service)
+%   E：种群中个体的实际预热能耗
+function [E] = preheating_energy(Eh,Population,Th,Tc,Idle,Start_candidate_service,End_candidate_service)
 [population_size,subtask_num] = size(Population);
 E = zeros(population_size,subtask_num);
 for k = 1:population_size
@@ -20,6 +24,6 @@ for k = 1:population_size
         cohesion = get_cohesion(Th_candidate_service,Tc_candidate_service,Periods,start_time,end_time); % 获取任务衔接度
         
         energy = Eh(candidate_service,i); % 候选服务启动能耗
-        E(k,i) = energy * cohesion;
+        E(k,i) = energy * (2 - cohesion); % cohesion包括前向衔接度和后向衔接度，最大值为2
     end
 end
