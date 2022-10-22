@@ -6,7 +6,7 @@ global_parameters_block % Get code block of global parameters
 %% Generate the data
 % Main_file = ["Main_FSGS";"Main_ECAM"];
 % Filename = ["Data_FSGS";"Data_ECAM"];
-% Filename_postfix = ["333";"550";"505";"055";"100";"010";"001"]; % corresponds to Weight, for example, "-333" corresponds to 0.34,0.33,0.33
+% Filename_postfix = ["333";"550";"505";"055";"100";"010";"001"]; % corresponds to Weight, for example, "333" corresponds to 0.34,0.33,0.33
 % Weight = [0.34,0.33,0.33;0.5,0.5,0;0.5,0,0.5;0,0.5,0.5;1,0,0;0,1,0;0,0,1];
 % 
 % for ii = 1:size(Filename_postfix,1)
@@ -42,7 +42,7 @@ for ii = 1:size(Filename_postfix,1)
         hold on
         title(strcat("iteration=", string(gen_max)))
         x_desc = strcat("Quality,Cost,Time", "-", Filename_postfix(ii,:));
-        xlabel(x_desc),ylabel("Energy-saving");
+        xlabel(x_desc),ylabel("Preheating Energy Consumption");
     end
     hold off
 end
