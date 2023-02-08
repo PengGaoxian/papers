@@ -1,11 +1,11 @@
-% Main function to generate a schema for cloud manufacturing service selection and scheduling with FSGS and ECAM methods
+% Main function to generate a schema for cloud manufacturing service selection and scheduling with FSGS and ESGS methods
 clear
 clc
 global_parameters_block % Get code block of global parameters 
 
 %% Generate the data
-% Main_file = ["Main_FSGS";"Main_ECAM"];
-% Filename = ["Data_FSGS";"Data_ECAM"];
+% Main_file = ["Main_FSGS";"Main_ESGS"];
+% Filename = ["Data_FSGS";"Data_ESGS"];
 % Filename_postfix = ["333";"550";"505";"055";"100";"010";"001"]; % corresponds to Weight, for example, "333" corresponds to 0.34,0.33,0.33
 % Weight = [0.34,0.33,0.33;0.5,0.5,0;0.5,0,0.5;0,0.5,0.5;1,0,0;0,1,0;0,0,1];
 % 
@@ -29,7 +29,7 @@ global_parameters_block % Get code block of global parameters
 
 %% Load the generated data and plot pareto front
 dirname = [pwd, '\'];
-Filename = ["Data_FSGS";"Data_ECAM"];
+Filename = ["Data_FSGS";"Data_ESGS"];
 Filename_postfix = ["333";"550";"505";"055";"100";"010";"001"];
 color = ["r*";"bd"];
 
@@ -49,7 +49,7 @@ end
 
 %% Load the generated data and plot the energy consumption comparison bar chart
 dirname = [pwd, '\'];
-Filename = ["Data_FSGS";"Data_ECAM"];
+Filename = ["Data_FSGS";"Data_ESGS"];
 Filename_postfix = ['333';'550';'505';'055';'100';'010';'001'];
 
 for iii = 1:size(Filename_postfix,1)
@@ -105,50 +105,50 @@ for iii = 1:size(Filename_postfix,1)
 end
 
 %% Load the generated data and plot the energy consumption comparison boxplots
-% dirname = [pwd, '\'];
-% Filename = ["Data_FSGS";"Data_ECAM"];
-% Filename_postfix = ['333';'550';'505';'055';'100';'010';'001'];
-% 
-% for iii = 1:size(Filename_postfix,1)
-%     figure
-%     Energy_percentage = zeros(6,size(Filename,1));
-%     for jjj = 1:size(Filename,1)
-%         file = strcat(dirname, Filename(jjj,:), "-", Filename_postfix(iii,:)); 
-%         save('parameters1','dirname','Filename_postfix','Filename','iii','jjj','Energy_percentage','file')
-%         clear % Clear the data of the previous round
-%         load('parameters1')
-%         load(file);
-%         front_Fitness_bottom = Population_front_last_Fitness_value(:,2);
-%         front_Fitness_top = Population_front_last_Fitness_value(:,1);
-%         
-%         A_index = find(front_Fitness_bottom>=0.0&front_Fitness_bottom<0.2);
-%         B_index = find(front_Fitness_bottom>=0.2&front_Fitness_bottom<0.4);
-%         C_index = find(front_Fitness_bottom>=0.4&front_Fitness_bottom<0.6);
-%         D_index = find(front_Fitness_bottom>=0.6&front_Fitness_bottom<0.8);
-%         E_index = find(front_Fitness_bottom>=0.8&front_Fitness_bottom<1.0);
-% 
-%         A_top = front_Fitness_top(A_index);
-%         B_top = front_Fitness_top(B_index);
-%         C_top = front_Fitness_top(C_index);
-%         D_top = front_Fitness_top(D_index);
-%         E_top = front_Fitness_top(E_index);
-%         Total_top = front_Fitness_top;
-%     end
-%     Energy_padding = NaN(population_size,6);
-%     
-%     Energy_padding(1:size(A_top,1),1) = A_top;
-%     Energy_padding(1:size(B_top,1),2) = B_top;
-%     Energy_padding(1:size(C_top,1),3) = C_top;
-%     Energy_padding(1:size(D_top,1),4) = D_top;
-%     Energy_padding(1:size(E_top,1),5) = E_top;
-%     Energy_padding(1:size(Total_top,1),6) = Total_top;
-%     
-%     boxplot(Energy_padding)
-% end
+dirname = [pwd, '\'];
+Filename = ["Data_FSGS";"Data_ESGS"];
+Filename_postfix = ['333';'550';'505';'055';'100';'010';'001'];
+
+for iii = 1:size(Filename_postfix,1)
+    figure
+    Energy_percentage = zeros(6,size(Filename,1));
+    for jjj = 1:size(Filename,1)
+        file = strcat(dirname, Filename(jjj,:), "-", Filename_postfix(iii,:)); 
+        save('parameters1','dirname','Filename_postfix','Filename','iii','jjj','Energy_percentage','file')
+        clear % Clear the data of the previous round
+        load('parameters1')
+        load(file);
+        front_Fitness_bottom = Population_front_last_Fitness_value(:,2);
+        front_Fitness_top = Population_front_last_Fitness_value(:,1);
+        
+        A_index = find(front_Fitness_bottom>=0.0&front_Fitness_bottom<0.2);
+        B_index = find(front_Fitness_bottom>=0.2&front_Fitness_bottom<0.4);
+        C_index = find(front_Fitness_bottom>=0.4&front_Fitness_bottom<0.6);
+        D_index = find(front_Fitness_bottom>=0.6&front_Fitness_bottom<0.8);
+        E_index = find(front_Fitness_bottom>=0.8&front_Fitness_bottom<1.0);
+
+        A_top = front_Fitness_top(A_index);
+        B_top = front_Fitness_top(B_index);
+        C_top = front_Fitness_top(C_index);
+        D_top = front_Fitness_top(D_index);
+        E_top = front_Fitness_top(E_index);
+        Total_top = front_Fitness_top;
+    end
+    Energy_padding = NaN(population_size,6);
+    
+    Energy_padding(1:size(A_top,1),1) = A_top;
+    Energy_padding(1:size(B_top,1),2) = B_top;
+    Energy_padding(1:size(C_top,1),3) = C_top;
+    Energy_padding(1:size(D_top,1),4) = D_top;
+    Energy_padding(1:size(E_top,1),5) = E_top;
+    Energy_padding(1:size(Total_top,1),6) = Total_top;
+    
+    boxplot(Energy_padding)
+end
 
 %% Plot the gantt chart
 dirname = [pwd, '\'];
-Filename_gantt = "Data_ECAM-333";  
+Filename_gantt = "Data_ESGS-333";  
 
 file = strcat(dirname,Filename_gantt);
 load(file)
